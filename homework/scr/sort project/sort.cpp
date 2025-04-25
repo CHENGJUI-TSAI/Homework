@@ -149,4 +149,3 @@ void compositeSort(vector<int> arr)
     int depthLimit = static_cast<int>(2 * std::log2(arr.size()));
     introRec(arr, 0, static_cast<int>(arr.size()) - 1, depthLimit);
 }
-
