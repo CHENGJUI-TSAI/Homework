@@ -1,0 +1,17 @@
+﻿  Sort.cpp
+C:\Users\x9312\OneDrive\桌面\C++\C++\C++\C++\Sort.cpp(55,3): error C2065: 'j': 未宣告的識別項
+C:\Users\x9312\OneDrive\桌面\C++\C++\C++\C++\Sort.cpp(55,1): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
+C:\Users\x9312\OneDrive\桌面\C++\C++\C++\C++\Sort.cpp(55,8): error C2065: 'key': 未宣告的識別項
+C:\Users\x9312\OneDrive\桌面\C++\C++\C++\C++\Sort.cpp(56,5): error C2059: 語法錯誤: '}'
+C:\Users\x9312\OneDrive\桌面\C++\C++\C++\C++\Sort.cpp(56,5): error C2143: 語法錯誤: 遺漏 ';' (在 '}' 之前)
+C:\Users\x9312\OneDrive\桌面\C++\C++\C++\C++\Sort.cpp(57,1): error C2143: 語法錯誤: 遺漏 ';' (在 '}' 之前)
+C:\Users\x9312\OneDrive\桌面\C++\C++\C++\C++\Sort.cpp(57,1): error C2059: 語法錯誤: '}'
+C:\Users\x9312\OneDrive\桌面\C++\C++\C++\C++\Sort.cpp(60,47): error C2143: 語法錯誤: 遺漏 ';' (在 '{' 之前)
+C:\Users\x9312\OneDrive\桌面\C++\C++\C++\C++\Sort.cpp(60,47): error C2447: '{': 遺漏函式標頭 (舊樣式型式清單?)
+C:\Users\x9312\OneDrive\桌面\C++\C++\C++\C++\Sort.cpp(68,19): error C3861: 'med3': 找不到識別項
+C:\Users\x9312\OneDrive\桌面\C++\C++\C++\C++\Sort.cpp(143,15): warning C4244: '正在初始化': 將 '_Rep' 轉換為 'double'，由於類型不同，可能導致資料遺失
+C:\Users\x9312\OneDrive\桌面\C++\C++\C++\C++\Sort.cpp(143,15): warning C4244:         with
+C:\Users\x9312\OneDrive\桌面\C++\C++\C++\C++\Sort.cpp(143,15): warning C4244:         [
+C:\Users\x9312\OneDrive\桌面\C++\C++\C++\C++\Sort.cpp(143,15): warning C4244:             _Rep=__int64
+C:\Users\x9312\OneDrive\桌面\C++\C++\C++\C++\Sort.cpp(143,15): warning C4244:         ]
+C:\Users\x9312\OneDrive\桌面\C++\C++\C++\C++\Sort.cpp(182,52): warning C4244: '=': 將 'double' 轉換為 'size_t'，由於類型不同，可能導致資料遺失
