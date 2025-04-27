@@ -472,3 +472,48 @@ Pagefile Usage:        744 KB
 極大規模（n ≫ 10⁶）或分散式場景：合併排序易於並行化分割，若有多執行緒／多核環境，可進一步採用多路合併或外部排序技術。
 
 ###申論及開發報告
+std::vector<int>
+使用資料結構原因：
+
+C++ 的 std::vector 提供動態陣列功能，可自動管理記憶體。
+
+支援隨機存取（O(1)時間複雜度）與彈性大小調整，適合各種規模的排序測試。
+
+內建與 STL 演算法（如 make_heap, sort_heap）相容，方便使用 STL 函式提升效率。
+
+
+使用的演算法與原因
+(1) Insertion Sort
+適用小型資料。
+
+時間複雜度 O(n²)，但在資料量小或幾乎有序時表現良好。
+
+(2) Quick Sort
+適合大部分一般資料。
+
+平均時間複雜度 O(n log n)，遞迴實作，pivot 選中間元素。
+
+簡單快速，但最差情況為 O(n²)。
+
+(3) Merge Sort
+穩定且適合大型資料。
+
+時間複雜度穩定為 O(n log n)，但需要額外 O(n) 空間。
+
+適合大量資料且需要穩定排序的情境。
+
+(4) Heap Sort
+不需要額外空間的 O(n log n) 排序。
+
+使用 std::make_heap 和 std::sort_heap。
+
+不穩定排序，但記憶體效率佳，適合空間受限情況。
+
+(5) Composite Sort 
+結合多種排序法的自適應排序。
+
+初期使用 Quick Sort，當遞迴層數過深時切換為 Heap Sort。
+
+小範圍內使用 Insertion Sort 優化。
+
+兼具 Quick Sort 的快與 Heap Sort 的穩，避免 Quick Sort 最差情形。
