@@ -1,10 +1,8 @@
-//=============================
-// sort.cpp  
-//=============================
 #include "sorts.h"
 #include <vector>
 #include <algorithm>
 #include <cmath>
+
 using namespace std;
 
 /*-------------------------------------------------
@@ -12,146 +10,128 @@ using namespace std;
 -------------------------------------------------*/
 void insertionSort(vector<int> arr)
 {
-    int len = arr.size();
-    for (int idx = 1; idx < len; ++idx) {
-        int temp = arr[idx];
-        int pos = idx;
-        while (pos > 0 && arr[pos - 1] > temp) {
-            arr[pos] = arr[pos - 1];
-            --pos;
+    int len = int(arr.size());
+    for (int i = 1; i < len; ++i) {
+        int key = arr[i], j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            --j;
         }
-        arr[pos] = temp;
+        arr[j + 1] = key;
     }
 }
 
 /*-------------------------------------------------
-  2. Quick Sort（簡單版，pivot = 中間）
+  2. Quick Sort
 -------------------------------------------------*/
 namespace {
-    void quickSortHelper(vector<int>& data, int low, int high)
+    void quickRec(vector<int>& a, int l, int r)
     {
-        if (low >= high) return;
-
-        int pivotVal = data[(low + high) / 2];
-        int left = low, right = high;
-
-        while (left <= right) {
-            while (data[left] < pivotVal) ++left;
-            while (data[right] > pivotVal) --right;
-            if (left <= right) {
-                swap(data[left], data[right]);
-                ++left;
-                --right;
-            }
+        if (l >= r) return;
+        int pivot = a[(l + r) / 2];
+        int i = l, j = r;
+        while (i <= j) {
+            while (a[i] < pivot) ++i;
+            while (a[j] > pivot) --j;
+            if (i <= j) swap(a[i++], a[j--]);
         }
-        if (low < right) quickSortHelper(data, low, right);
-        if (left < high) quickSortHelper(data, left, high);
+        quickRec(a, l, j);
+        quickRec(a, i, r);
     }
 }
 
 void quickSort(vector<int> arr)
 {
-    if (arr.empty()) return;
-    quickSortHelper(arr, 0, arr.size() - 1);
+    if (!arr.empty()) {
+        quickRec(arr, 0, int(arr.size()) - 1);
+    }
 }
 
 /*-------------------------------------------------
-  3. Merge Sort（Top-down）
+  3. Merge Sort
 -------------------------------------------------*/
 namespace {
-    void mergeParts(vector<int>& arr, int left, int mid, int right)
+    void mergeParts(vector<int>& a, int l, int m, int r)
     {
-        vector<int> leftArr(arr.begin() + left, arr.begin() + mid + 1);
-        vector<int> rightArr(arr.begin() + mid + 1, arr.begin() + right + 1);
-
-        int idxL = 0, idxR = 0, idxMerge = left;
-
-        while (idxL < leftArr.size() && idxR < rightArr.size()) {
-            if (leftArr[idxL] <= rightArr[idxR]) {
-                arr[idxMerge++] = leftArr[idxL++];
-            } else {
-                arr[idxMerge++] = rightArr[idxR++];
-            }
-        }
-        while (idxL < leftArr.size()) arr[idxMerge++] = leftArr[idxL++];
-        while (idxR < rightArr.size()) arr[idxMerge++] = rightArr[idxR++];
+        vector<int> L(a.begin() + l, a.begin() + m + 1),
+            R(a.begin() + m + 1, a.begin() + r + 1);
+        int i = 0, j = 0, k = l;
+        while (i < int(L.size()) && j < int(R.size()))
+            a[k++] = (L[i] <= R[j] ? L[i++] : R[j++]);
+        while (i < int(L.size())) a[k++] = L[i++];
+        while (j < int(R.size())) a[k++] = R[j++];
     }
 
-    void mergeSortHelper(vector<int>& arr, int left, int right)
+    void mergeRec(vector<int>& a, int l, int r)
     {
-        if (left >= right) return;
-        int mid = left + (right - left) / 2;
-        mergeSortHelper(arr, left, mid);
-        mergeSortHelper(arr, mid + 1, right);
-        mergeParts(arr, left, mid, right);
+        if (l >= r) return;
+        int m = l + (r - l) / 2;
+        mergeRec(a, l, m);
+        mergeRec(a, m + 1, r);
+        mergeParts(a, l, m, r);
     }
 }
 
 void mergeSort(vector<int> arr)
 {
-    if (arr.size() > 1)
-        mergeSortHelper(arr, 0, arr.size() - 1);
+    if (arr.size() > 1) {
+        mergeRec(arr, 0, int(arr.size()) - 1);
+    }
 }
 
 /*-------------------------------------------------
-  4. Heap Sort（STL實作）
+  4. Heap Sort
 -------------------------------------------------*/
 void heapSort(vector<int> arr)
 {
     if (arr.empty()) return;
-    push_heap(arr.begin(), arr.end());
+    make_heap(arr.begin(), arr.end());
     sort_heap(arr.begin(), arr.end());
 }
 
 /*-------------------------------------------------
-  5. Composite Sort（IntroSort）
+  5. Composite Sort
 -------------------------------------------------*/
 namespace {
     const int INSERTION_LIMIT = 16;
 
-    void insertionSortSection(vector<int>& arr, int left, int right)
+    void insertionSection(vector<int>& a, int l, int r)
     {
-        for (int i = left + 1; i <= right; ++i) {
-            int key = arr[i];
-            int j = i - 1;
-            while (j >= left && arr[j] > key) {
-                arr[j + 1] = arr[j];
-                --j;
-            }
-            arr[j + 1] = key;
+        for (int i = l + 1; i <= r; ++i) {
+            int key = a[i], j = i - 1;
+            while (j >= l && a[j] > key)
+                a[j + 1] = a[j--];
+            a[j + 1] = key;
         }
     }
 
-    void introSortHelper(vector<int>& arr, int left, int right, int maxDepth)
+    void introRec(vector<int>& a, int l, int r, int depth)
     {
-        if (right - left + 1 <= INSERTION_LIMIT) {
-            insertionSortSection(arr, left, right);
+        if (r - l + 1 <= INSERTION_LIMIT) {
+            insertionSection(a, l, r);
             return;
         }
-        if (maxDepth == 0) {
-            make_heap(arr.begin() + left, arr.begin() + right + 1);
-            sort_heap(arr.begin() + left, arr.begin() + right + 1);
+        if (depth == 0) {
+            make_heap(a.begin() + l, a.begin() + r + 1);
+            sort_heap(a.begin() + l, a.begin() + r + 1);
             return;
         }
-
-        int mid = left + (right - left) / 2;
-        if (arr[left] > arr[mid]) swap(arr[left], arr[mid]);
-        if (arr[left] > arr[right]) swap(arr[left], arr[right]);
-        if (arr[mid] > arr[right]) swap(arr[mid], arr[right]);
-        int pivot = arr[mid];
-        swap(arr[mid], arr[right - 1]);
-
-        int i = left, j = right - 1;
+        int m = l + (r - l) / 2;
+        if (a[l] > a[m]) swap(a[l], a[m]);
+        if (a[l] > a[r]) swap(a[l], a[r]);
+        if (a[m] > a[r]) swap(a[m], a[r]);
+        int pivot = a[m];
+        swap(a[m], a[r - 1]);
+        int i = l, j = r - 1;
         while (true) {
-            while (arr[++i] < pivot);
-            while (arr[--j] > pivot);
+            while (a[++i] < pivot);
+            while (a[--j] > pivot);
             if (i >= j) break;
-            swap(arr[i], arr[j]);
+            swap(a[i], a[j]);
         }
-        swap(arr[i], arr[right - 1]);
-
-        introSortHelper(arr, left, i - 1, maxDepth - 1);
-        introSortHelper(arr, i + 1, right, maxDepth - 1);
+        swap(a[i], a[r - 1]);
+        introRec(a, l, i - 1, depth - 1);
+        introRec(a, i + 1, r, depth - 1);
     }
 }
 
@@ -159,5 +139,5 @@ void compositeSort(vector<int> arr)
 {
     if (arr.size() <= 1) return;
     int maxDepth = 2 * log2(arr.size());
-    introSortHelper(arr, 0, arr.size() - 1, maxDepth);
+    introRec(arr, 0, int(arr.size()) - 1, maxDepth);
 }
