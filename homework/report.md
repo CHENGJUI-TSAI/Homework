@@ -193,6 +193,7 @@ void runAndMeasure(void (*sortFunc)(vector<int>), const vector<int>& original)
 3.複合排序在所有規模下耗時最少，也符合其優化組合策略的高效性。
 
 ### 測試案例
+```
 == n = 500 ==
 [Insertion]  Avg   0.5494 ms | Worst 0.578 ms
 ----------------------------------------------------------
@@ -415,7 +416,7 @@ Peak Working Set Size: 4668 KB
 Pagefile Usage:        744 KB
 ----------------------------------------------------------
 ===========================
-
+```
 
 
 平均時間
@@ -449,7 +450,7 @@ Pagefile Usage:        744 KB
 | 複合排序      | O(n) / O(n log n)  | O(n log n)        | O(n log n)         | O(n) / O(log n)          |
 
 ![worst_time_chart 折線圖](https://github.com/CHENGJUI-TSAI/Homework/blob/main/homework/src/images/worst_time_chart.png)
-
+![average_time_chart 折線圖](https://github.com/CHENGJUI-TSAI/Homework/blob/main/homework/src/images/average_time_chart.png)
 
 ### 結論
 
