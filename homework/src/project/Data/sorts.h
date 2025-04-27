@@ -3,11 +3,12 @@
 #define SORTS_H
 
 #include <vector>
+using namespace std;
 
-void insertionSort(std::vector<int> arr);
-void quickSort(std::vector<int> arr);
-void mergeSort(std::vector<int> arr);
-void heapSort(std::vector<int> arr);
-void compositeSort(std::vector<int> arr);
+void insertionSort(vector<int> arr);
+void quickSort(vector<int> arr);
+void mergeSort(vector<int> arr);
+void heapSort(vector<int> arr);
+void compositeSort(vector<int> arr);
 
 #endif
