@@ -5,8 +5,7 @@
 #include <algorithm>
 #include <vector>
 #include <cmath>   // log2
-using std::swap;
-using std::vector;
+using namespace std;
 
 /*-------------------------------------------------
   1. Insertion Sort
@@ -89,8 +88,8 @@ void mergeSort(vector<int> arr)
 -------------------------------------------------*/
 void heapSort(vector<int> arr)
 {
-    std::make_heap(arr.begin(), arr.end());
-    std::sort_heap(arr.begin(), arr.end());
+    make_heap(arr.begin(), arr.end());
+    sort_heap(arr.begin(), arr.end());
 }
 
 /*-------------------------------------------------
@@ -112,13 +111,13 @@ namespace {
 
     void introRec(vector<int>& a, int l, int r, int depth)
     {
-        if (r - l + 1 <= CUTOFF) {          // 小陣列直接插入
+        if (r - l + 1 <= CUTOFF) {
             insertionSmall(a, l, r);
             return;
         }
-        if (depth == 0) {                   // 超深度 -> Heap
-            std::make_heap(a.begin() + l, a.begin() + r + 1);
-            std::sort_heap(a.begin() + l, a.begin() + r + 1);
+        if (depth == 0) {
+            make_heap(a.begin() + l, a.begin() + r + 1);
+            sort_heap(a.begin() + l, a.begin() + r + 1);
             return;
         }
         /* median-of-three pivot */
@@ -127,7 +126,7 @@ namespace {
         if (a[l] > a[r]) swap(a[l], a[r]);
         if (a[m] > a[r]) swap(a[m], a[r]);
         int pivot = a[m];
-        swap(a[m], a[r - 1]);               // pivot 到 r-1
+        swap(a[m], a[r - 1]);
 
         int i = l, j = r - 1;
         while (true) {
@@ -136,7 +135,7 @@ namespace {
             if (i >= j) break;
             swap(a[i], a[j]);
         }
-        swap(a[i], a[r - 1]);               // 還原 pivot
+        swap(a[i], a[r - 1]);
 
         introRec(a, l, i - 1, depth - 1);
         introRec(a, i + 1, r, depth - 1);
@@ -146,6 +145,6 @@ namespace {
 void compositeSort(vector<int> arr)
 {
     if (arr.size() <= 1) return;
-    int depthLimit = static_cast<int>(2 * std::log2(arr.size()));
+    int depthLimit = static_cast<int>(2 * log2(arr.size()));
     introRec(arr, 0, static_cast<int>(arr.size()) - 1, depthLimit);
 }
