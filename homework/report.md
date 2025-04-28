@@ -452,7 +452,7 @@ Pagefile Usage:        744 KB
 ![worst_time_chart 折線圖](https://github.com/CHENGJUI-TSAI/Homework/blob/main/homework/src/images/worst_time_chart.png)
 ![average_time_chart 折線圖](https://github.com/CHENGJUI-TSAI/Homework/blob/main/homework/src/images/average_time_chart.png)
 
-### 結論
+## 結論
 
 1. 測驗結果顯示，插入排序適合在小規模資料（n ≤ 500），但隨 n 增大，其執行時間快速惡化，完全符合 O(n²) 的二次增長特性。
 
@@ -463,7 +463,7 @@ Pagefile Usage:        744 KB
 
 
 
-### 應用建議
+## 應用建議
 
 小資料量（n < 1000）：可優先考慮複合排序或插入排序，以簡單、低常數因子獲得最好效能。
 
@@ -471,7 +471,7 @@ Pagefile Usage:        744 KB
 
 極大規模（n ≫ 10⁶）或分散式場景：合併排序易於並行化分割，若有多執行緒／多核環境，可進一步採用多路合併或外部排序技術。
 
-###申論及開發報告
+##申論及開發報告
 std::vector<int>
 使用資料結構原因：
 
