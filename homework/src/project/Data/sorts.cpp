@@ -5,9 +5,8 @@
 
 using namespace std;
 
-/*-------------------------------------------------
-  1. Insertion Sort
--------------------------------------------------*/
+// Insertion Sort
+
 void insertionSort(vector<int> arr)
 {
     int len = int(arr.size());
@@ -21,9 +20,8 @@ void insertionSort(vector<int> arr)
     }
 }
 
-/*-------------------------------------------------
-  2. Quick Sort
--------------------------------------------------*/
+//Quick Sort
+
 namespace {
     void quickRec(vector<int>& a, int l, int r)
     {
@@ -47,9 +45,8 @@ void quickSort(vector<int> arr)
     }
 }
 
-/*-------------------------------------------------
-  3. Merge Sort
--------------------------------------------------*/
+//Merge Sort
+
 namespace {
     void mergeParts(vector<int>& a, int l, int m, int r)
     {
@@ -79,9 +76,8 @@ void mergeSort(vector<int> arr)
     }
 }
 
-/*-------------------------------------------------
-  4. Heap Sort
--------------------------------------------------*/
+// Heap Sort
+
 void heapSort(vector<int> arr)
 {
     if (arr.empty()) return;
@@ -89,9 +85,8 @@ void heapSort(vector<int> arr)
     sort_heap(arr.begin(), arr.end());
 }
 
-/*-------------------------------------------------
-  5. Composite Sort
--------------------------------------------------*/
+//Composite Sort
+
 namespace {
     const int INSERTION_LIMIT = 16;
 
