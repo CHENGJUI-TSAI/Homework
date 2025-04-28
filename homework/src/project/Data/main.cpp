@@ -12,9 +12,9 @@
 using namespace std;
 using Clock = chrono::high_resolution_clock;
 
-//--------------------------------------------------
-// 隨機打亂 Permute
-//--------------------------------------------------
+
+// 隨機打亂 
+
 template <class T>
 void Permute(T* a, int n)
 {
@@ -24,9 +24,8 @@ void Permute(T* a, int n)
     }
 }
 
-//--------------------------------------------------
+
 // 印出記憶體使用量
-//--------------------------------------------------
 void printMemoryUsage()
 {
     PROCESS_MEMORY_COUNTERS memInfo{};
@@ -40,9 +39,8 @@ void printMemoryUsage()
     cout << "----------------------------------------------------------\n";
 }
 
-//--------------------------------------------------
 // 測試排序
-//--------------------------------------------------
+
 void runAndMeasure(void (*sortFunc)(vector<int>), const vector<int>& original)
 {
     const int REPEAT = 10;
@@ -63,9 +61,7 @@ void runAndMeasure(void (*sortFunc)(vector<int>), const vector<int>& original)
     printMemoryUsage();
 }
 
-//--------------------------------------------------
-// main
-//--------------------------------------------------
+
 int main()
 {
     srand(unsigned(time(nullptr)));
